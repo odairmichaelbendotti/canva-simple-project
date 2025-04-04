@@ -1,0 +1,30 @@
+{
+  "name": "canva-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon ./server.js",
+    "client": "npm run dev --prefix frontend",
+    "start": "node server.js",
+    "dev": " concurrently \" npm run server \" \" npm run client \" ",
+    "client-build": "npm run build --prefix frontend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "mongoose": "^8.13.1",
+    "react-icons": "^5.5.0",
+    "react-multi-carousel": "^2.8.5",
+    "react-router-dom": "^7.4.1",
+    "tailwind-scrollbar-hide": "^2.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.9"
+  }
+}
