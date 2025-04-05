@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import SignIn from '../components/SignIn';
 import SignUp from './../components/SignUp';
+import { Outlet, useOutletContext } from 'react-router-dom';
 
 const Index = () => {
-    const [show, setShow] = useState({ signin: false, signup: false })
+    const { show, setShow, inputSignIn, handleChangeInputSignIn } = useOutletContext()
+    const [inputSignUp, setInputSignUp] = useState({ name: '', email: '', password: '' })
+
+    const handleChangeInputSignUp = (e) => {
+        setInputSignUp({
+            ...inputSignUp,
+            [e.target.name]: e.target.value
+        })
+    }
 
     return (
         <main className='flex flex-col h-full bg-[#282828] relative'>
@@ -12,26 +21,24 @@ const Index = () => {
                 <span className='text-xl text-[#ACA9A9] font-medium text-center mt-4'>Com canva você pode criar designs profissionais com mais facilidade.</span>
                 <div className='flex justify-center items-center gap-4 w-full'>
                     <button
-                        className='bg-[#016D6E] py-2 max-w-50 w-full text-white rounded-md mt-6 cursor-pointer hover:opacity-85'
-                        onClick={() => setShow({signin: true, signup: false})}
-                    >SignIn</button>
-                    <button
                         className='bg-[#8436D2] py-2 max-w-50 w-full text-white rounded-md mt-6 cursor-pointer hover:opacity-85'
-                        onClick={() => setShow({signin: false, signup: true})}
+                        onClick={() => setShow({ signin: false, signup: true })}
                     >SignUp for free</button>
                 </div>
 
             </div>
             {show.signin &&
                 <div className='flex justify-center items-center w-full h-full absolute'>
-                    <SignIn setShow={setShow} />
+                    <SignIn setShow={setShow} handleChangeInputSignIn={handleChangeInputSignIn} inputSignIn={inputSignIn} />
                 </div>
             }
             {show.signup &&
                 <div className='flex justify-center items-center w-full h-full absolute'>
-                    <SignUp setShow={setShow} />
+                    <SignUp setShow={setShow} handleChangeInputSignUp={handleChangeInputSignUp} inputSignUp={inputSignUp} />
                 </div>
             }
+
+            {/* <Outlet context={{ setShow, inputSignIn, handleChangeInputSignIn}} /> */}
         </main>
     );
 };

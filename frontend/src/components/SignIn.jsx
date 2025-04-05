@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IoMdClose } from "react-icons/io";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
+import { TbEyeClosed } from "react-icons/tb";
+import { IoEyeOutline } from "react-icons/io5";
+import { Outlet, useOutletContext } from 'react-router-dom';
 
-const SignIn = ({ setShow }) => {
+const SignIn = ({ setShow, inputSignIn }) => {
+    const [showPassword, setShowPassword] = useState(false)
+    const { handleChangeInputSignIn } = useOutletContext()
+
     return (
         <div className='w-90 bg-[#202224] shadow-lg p-8 rounded-lg'>
             <div className='flex flex-col'>
@@ -11,8 +17,8 @@ const SignIn = ({ setShow }) => {
                     <IoMdClose
                         size={20}
                         className='cursor-pointer'
-                        onClick={() => setShow({ signin: false, signup: false })} />
-
+                        onClick={() => setShow({ signin: false, signup: false })}
+                    />
                 </div>
                 <div>
                     <label htmlFor="email" className='text-white'>E-mail</label>
@@ -21,18 +27,32 @@ const SignIn = ({ setShow }) => {
                         id="email"
                         className='w-full border-1 border-gray-700 rounded-md outline-none pl-2 text-sm text-gray-300 py-2 focus:border-green-500'
                         placeholder='E-mail'
+                        name='email'
+                        onChange={(e) => handleChangeInputSignIn(e)}
                     />
                 </div>
-                <div className='mt-4'>
+                <div className='mt-4 relative'>
                     <label htmlFor="password" className='text-white'>Password</label>
                     <input
-                        type="password"
+                        type={showPassword ? 'text' : 'password'}
                         id="password"
                         className='w-full border-1 border-gray-700 rounded-md outline-none pl-2 text-sm text-gray-300 py-2 focus:border-green-500'
                         placeholder='Password'
+                        name='password'
+                        onChange={(e) => handleChangeInputSignIn(e)}
                     />
+                    {showPassword ?
+                        (<IoEyeOutline
+                            className='absolute top-9 right-2 cursor-pointer text-gray-500'
+                            onClick={() => setShowPassword(!showPassword)}
+                        />)
+                        :
+                        (<TbEyeClosed
+                            className='absolute top-9 right-2 cursor-pointer text-gray-500'
+                            onClick={() => setShowPassword(!showPassword)}
+                        />)}
                 </div>
-                <button className='mt-4 w-full bg-[#8436D2] py-2 rounded-md text-white font-bold cursor-pointer hover:opacity-85'>Sign In</button>
+                <button className='mt-4 w-full bg-[#8436D2] py-2 rounded-md text-white font-bold cursor-pointer hover:opacity-85' onClick={() => console.log(inputSignIn)}>Sign In</button>
 
                 <div className='flex gap-4 items-center mx-auto'>
                     <div className='w-26 h-[1px] bg-gray-600'></div>
@@ -55,7 +75,7 @@ const SignIn = ({ setShow }) => {
                 </button>
 
             </div>
-
+            <Outlet context={ handleChangeInputSignIn } />
         </div>
     );
 };

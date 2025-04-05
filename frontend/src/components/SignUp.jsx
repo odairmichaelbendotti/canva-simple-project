@@ -1,48 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IoMdClose } from "react-icons/io";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
+import { TbEyeClosed } from "react-icons/tb";
+import { IoEyeOutline } from "react-icons/io5";
 
-const SignUp = ({ setShow }) => {
+const SignUp = ({ setShow, handleChangeInputSignUp, inputSignUp }) => {
+
+    const [showPassword, setShowPassword] = useState(false)
+
     return (
         <div className='w-90 bg-[#202224] shadow-lg p-8 rounded-lg'>
             <div className='flex flex-col'>
                 <div className='flex items-center text-white mb-6'>
-                    <p className='flex-1 text-center uppercase font-bold'>Login</p>
+                    <p className='flex-1 text-center uppercase font-bold'>Register</p>
                     <IoMdClose size={20}
                         className='cursor-pointer'
                         onClick={() => setShow({ signin: false, signup: false })} />
 
                 </div>
 
-                <div className='mt-4'>
+                <div>
                     <label htmlFor="name" className='text-white'>Name</label>
                     <input
                         type="text"
                         id="name"
                         className='w-full border-1 border-gray-700 rounded-md outline-none pl-2 text-sm text-gray-300 py-2 focus:border-green-500'
-                        placeholder='Password'
+                        placeholder='Name'
+                        name="name"
+                        onChange={(e) => handleChangeInputSignUp(e)}
                     />
                 </div>
 
-                <div>
+                <div className="mt-2">
                     <label htmlFor="email" className='text-white'>E-mail</label>
                     <input
-                        type="text"
+                        type="email"
                         id="email"
                         className='w-full border-1 border-gray-700 rounded-md outline-none pl-2 text-sm text-gray-300 py-2 focus:border-green-500'
                         placeholder='E-mail'
+                        name="email"
+                        onChange={(e) => handleChangeInputSignUp(e)}
                     />
                 </div>
-                <div className='mt-4'>
+
+                <div className='mt-2 relative'>
                     <label htmlFor="password" className='text-white'>Password</label>
                     <input
-                        type="password"
+                        type={showPassword ? 'text' : 'password'}
                         id="password"
                         className='w-full border-1 border-gray-700 rounded-md outline-none pl-2 text-sm text-gray-300 py-2 focus:border-green-500'
                         placeholder='Password'
+                        name="password"
+                        onChange={(e) => handleChangeInputSignUp(e)}
                     />
+                    {showPassword ?
+                        (<IoEyeOutline
+                            className='absolute top-9 right-2 cursor-pointer text-gray-500'
+                            onClick={() => setShowPassword(!showPassword)}
+                        />)
+                        :
+                        (<TbEyeClosed
+                            className='absolute top-9 right-2 cursor-pointer text-gray-500'
+                            onClick={() => setShowPassword(!showPassword)}
+                        />)}
                 </div>
-                <button className='mt-4 w-full bg-[#8436D2] py-2 rounded-md text-white font-bold cursor-pointer hover:opacity-85'>Sign In</button>
+
+                <button className='mt-4 w-full bg-[#8436D2] py-2 rounded-md text-white font-bold cursor-pointer hover:opacity-85' onClick={() => console.log(inputSignUp)}>Sign In</button>
 
                 <div className='flex gap-4 items-center mx-auto'>
                     <div className='w-26 h-[1px] bg-gray-600'></div>
