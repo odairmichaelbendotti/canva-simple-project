@@ -5,18 +5,16 @@ import { TbEyeClosed } from "react-icons/tb";
 import { IoEyeOutline } from "react-icons/io5";
 
 const SignUp = ({ setShow, handleChangeInputSignUp, inputSignUp }) => {
-
     const [showPassword, setShowPassword] = useState(false)
 
     return (
-        <div className='w-90 bg-[#202224] shadow-lg p-8 rounded-lg'>
+        <form className='w-90 bg-[#202224] shadow-lg p-8 rounded-lg'>
             <div className='flex flex-col'>
                 <div className='flex items-center text-white mb-6'>
                     <p className='flex-1 text-center uppercase font-bold'>Register</p>
                     <IoMdClose size={20}
                         className='cursor-pointer'
                         onClick={() => setShow({ signin: false, signup: false })} />
-
                 </div>
 
                 <div>
@@ -89,7 +87,7 @@ const SignUp = ({ setShow, handleChangeInputSignUp, inputSignUp }) => {
 
             </div>
 
-        </div>
+        </form>
     );
 };
 

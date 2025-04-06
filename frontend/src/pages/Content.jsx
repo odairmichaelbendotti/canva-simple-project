@@ -1,14 +1,17 @@
 import React from 'react';
-import SignIn from '../components/SignIn'
 import { useOutletContext } from 'react-router-dom';
-import Sidebar from '../components/Sidebar';
+import Topbar from '../components/Topbar';
+import RecentDesign from '../components/RecentDesign';
 
 const Content = () => {
     const { } = useOutletContext()
 
     return (
-        <main className='flex h-full w-full bg-[#282828]'>
-            <p>Content Page</p>
+        <main className='flex flex-col h-full w-full bg-[#282828] px-2'>
+            <Topbar />
+            <div className='mt-2'>
+                <RecentDesign />
+            </div>
         </main>
     );
 };

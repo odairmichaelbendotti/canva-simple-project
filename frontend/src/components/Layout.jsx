@@ -20,13 +20,11 @@ const Layout = () => {
     const routesWithSideBar = ['/projects', '/templates', '/content']
     const shouldShowSideBar = routesWithSideBar.includes(location.pathname)
 
-    console.log(shouldShowSideBar)
-
     return (
         <div className='flex flex-col h-screen'>
             <Header setShow={setShow} />
             {shouldShowSideBar ?
-                (<div className='flex h-screen'>
+                (<div className='h-screen flex'>
                     <Sidebar />
                     <Outlet context={{ show, setShow, inputSignIn, handleChangeInputSignIn }} />
                 </div>)
