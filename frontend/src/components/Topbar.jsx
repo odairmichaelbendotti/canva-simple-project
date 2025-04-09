@@ -23,7 +23,12 @@ const Topbar = () => {
                 onClick={() => setShow(!show)}
             >Custom size</div>
             <p className='text-white text-3xl font-bold'>What will you design today?</p>
-            <CustomSize show={show} setShow={setShow} handleChangeInput={handleChangeInput} />
+            <CustomSize
+                show={show}
+                setShow={setShow}
+                handleChangeInput={handleChangeInput}
+                input={ input }
+            />
         </div>
     );
 };

@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IoCloseOutline } from "react-icons/io5";
 import { TbArrowAutofitWidth } from "react-icons/tb";
+import { useNavigate } from 'react-router-dom';
 
-const CustomSize = ({ show, setShow, handleChangeInput }) => {
-    
+const CustomSize = ({ input, show, setShow, handleChangeInput }) => {
+    const [checkInput, setCheckInput] = useState(false)
     const handleSubmit = (e) => {
         e.preventDefault()
+    }
+
+    const navigate = useNavigate()
+
+    const handleCreateNewDesign = () => {
+        if (!input.width || !input.height) {
+            setCheckInput(true)
+            return
+        } else {
+            setCheckInput(true)
+            navigate('/design/create', { state: { width: input.width, height: input.height } })
+        }
     }
 
     return (
@@ -44,8 +57,14 @@ const CustomSize = ({ show, setShow, handleChangeInput }) => {
                             />
                         </div>
                     </div>
+                    {checkInput &&
+                        <p className='font-bold text-xs text-red-600'>Os dois campos são obrigatórios.</p>
+                    }
 
-                    <button className='w-full py-2 px-2 bg-[#4876D2] mt-2 mb-1 rounded-md text-white cursor-pointer font-bold hover:opacity-95'>Create new design</button>
+                    <button
+                        className='w-full py-2 px-2 bg-[#4876D2] mt-2 mb-1 rounded-md text-white cursor-pointer font-bold hover:opacity-95'
+                        onClick={() => handleCreateNewDesign()}
+                    >Create new design</button>
                 </form>
             }
         </>

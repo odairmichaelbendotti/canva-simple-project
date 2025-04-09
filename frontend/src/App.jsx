@@ -5,6 +5,7 @@ import Index from './pages/Index';
 import Content from './pages/Content';
 import Project from './pages/Project';
 import Template from './pages/Template';
+import CreateDesign from './components/CreateDesign';
 
 const App = () => {
     const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const App = () => {
                 {
                     path: '/templates',
                     element: <Template />
+                },
+                {
+                    path: '/design/create',
+                    element: <CreateDesign />
                 }
             ]
         }
